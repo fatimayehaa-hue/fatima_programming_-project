@@ -8,6 +8,7 @@ struct flight
 {
     int id;
     string name;
+    string time;
     int seats;
 };
 
@@ -22,7 +23,8 @@ int main()
     cout << "2. Show Flights" << endl;
     cout << "3. Search Flight " << endl;
     cout << "4. Book Seat" << endl;
-    cout << "5. Exit" << endl;
+    cout << "5.Browse Available Destinations" << endl;
+    cout << "6. Exit" << endl;
  
     cout << "choose :";
     cin >> x;
@@ -35,6 +37,8 @@ int main()
     cin >> f1.id;
     cout << "enter the name of flight :";
     cin>>f1.name;
+    cout << "enter the time of flight :";
+    cin >> f1.time;
     cout << "enter the namber seats of flight :";
     cin >> f1.seats;
 
@@ -42,6 +46,7 @@ int main()
 
     file << f1.id << " ";
     file << f1.name << " ";
+    file << f1.time << " ";
     file << f1.seats <<endl;
     file.close();
     }
@@ -49,28 +54,31 @@ int main()
     {
         ifstream file("flight.txt");
         flight f;
-        while (file >> f.id >> f.name >> f.seats)
+        while (file >> f.id >> f.name >>f.time>> f.seats)
         {
             cout << "ID: " << f.id << endl;
             cout << "Name: " << f.name << endl;
+            cout << "time :" << f.time << endl;
             cout << "Seats: " << f.seats << endl;
         }
         file.close();
     }
    else if (x==3)
      {
-         int id;
-         cout << "enter the id of flight :";
-         cin >> id;
+         string name;
+         cout << "enter the name of flight :";
+         cin >> name;
+
          ifstream file("flight.txt");
          bool w=true ;
          flight f;
-         while (file >> f.id >> f.name >> f.seats)
+         while (file >> f.id >> f.name >>f.time>> f.seats)
          {
-            if (f.id==id)
+            if (f.name==name &&f.seats>0)
             {
              cout << "ID: " << f.id << endl;
              cout << "Name: " << f.name << endl;
+             cout << "time :" << f.time << endl;
              cout << "Seats: " << f.seats << endl;
              w = false;
             }
@@ -90,7 +98,7 @@ int main()
          f2.clear();
          ifstream file("flight.txt");
          flight f;
-         while (file >> f.id >> f.name >> f.seats)
+         while (file >> f.id >> f.name >>f.time>> f.seats)
          {
              f2.push_back(f);
 
@@ -105,7 +113,8 @@ int main()
             {
                 if (f2[i].seats > 0)
                 {
-                    f2[i].seats--;
+                    flight *ptr = &f2[i];
+                    ptr->seats--;
 
                     cout << "Seat Booked ok" << endl;
                 }
@@ -123,13 +132,30 @@ int main()
             
              outfile << f2[i].id << " ";
              outfile << f2[i].name << " ";
+             outfile << f2[i].time << " ";
              outfile << f2[i].seats << endl;
          }
              outfile.close();
     }
+
+    else if(x==5)
+    {
+        string destinations[30] = {"Baghdad", "Basra", "Erbil", "Najaf", "Mosul", "Dubai", "Istanbul", "Cairo", "Amman", "Doha",
+             "Kuwait", "Beirut", "Tehran", "Riyadh", "Jeddah", "Ankara", "Paris", "London", "Berlin", "Rome", "Damascus", "Sharjah",
+              "AbuDhabi", "Muscat", "Manama", "Frankfurt", "Madrid", "Toronto", "NewYork", "KualaLumpur"};
+
+        for (int i = 0; i < 30;i++)
+        {
+            cout << i+1 << "." << destinations[i] << endl;
+        }
+    }
+    else if(x>6&&x<1)
+    {
+        cout << "Invalid choice, please try again." << endl;
+    }
     
 
-    } while (x !=5);
+    } while (x !=6);
 
     return 0;
 } 
