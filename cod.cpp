@@ -15,7 +15,7 @@ struct flight
 int main()
 {
     int x;
-    vector<flight> flights;
+    
     
     do{
     cout << "  == == = Airline Reservation System == == =" << endl;
@@ -42,7 +42,7 @@ int main()
     cout << "enter the namber seats of flight :";
     cin >> f1.seats;
 
-    flights.push_back(f1);
+
 
     file << f1.id << " ";
     file << f1.name << " ";
