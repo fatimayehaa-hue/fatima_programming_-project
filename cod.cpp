@@ -149,7 +149,7 @@ int main()
             cout << i+1 << "." << destinations[i] << endl;
         }
     }
-    else if(x>6&&x<1)
+    else 
     {
         cout << "Invalid choice, please try again." << endl;
     }
